@@ -11,7 +11,7 @@
 #
 
 _PROMPT_CACHE_FILE="$HOME/.zsh_prompt_cache"
-_PROMPT_CACHE_TIMEOUT="60"
+_PROMPT_CACHE_TIMEOUT="40"
 
 function _time_to_color_level
 {
@@ -67,9 +67,9 @@ function _print_prompt_first_line
 function _print_prompt
 {
   eval $(cat "$_PROMPT_CACHE_FILE") # read cache value
-  local prompt="\\033[48;5;0;38;5;${time_color_code}m %c $reset_color%(0?.$fg[black].$fg[yellow]) >$reset_color "
+  local prompt="%{\\033[48;5;0;38;5;${time_color_code}m%} %c %{$reset_color%(0?.$fg[black].$fg[white])%} >%{$reset_color%} "
   if [[ $(( SECONDS - last_seconds )) -ge $_PROMPT_CACHE_TIMEOUT ]]; then
-    prompt="$(_print_prompt_first_line $time_color_code 0)${prompt}"
+    prompt="%{$(_print_prompt_first_line $time_color_code 0)%}${prompt}"
     _gen_cache_file
   fi
 
