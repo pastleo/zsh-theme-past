@@ -1,14 +1,4 @@
-# Dracula Theme v1.2.5
-#
-# https://github.com/dracula/dracula-theme
-#
-# Copyright 2016, All rights reserved
-#
-# Code licensed under the MIT license
-# http://zenorocha.mit-license.org
-#
-# @author Zeno Rocha <hi@zenorocha.com>
-#
+# Past Zsh theme
 
 _PROMPT_CACHE_FILE="$HOME/.zsh_prompt_cache"
 _PROMPT_CACHE_TIMEOUT="40"
