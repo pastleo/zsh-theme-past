@@ -36,7 +36,7 @@ function _time_color_code
 function _gen_cache_file
 {
   local last_seconds
-  if [ -v 1 ]; then # _gen_cache_file init
+  if [ "$1" = "init" ]; then # _gen_cache_file init
     last_seconds="-$_PROMPT_CACHE_TIMEOUT"
   else
     last_seconds=$SECONDS
@@ -57,7 +57,7 @@ function _print_prompt_first_line
 function _print_prompt
 {
   eval $(cat "$_PROMPT_CACHE_FILE") # read cache value
-  local prompt="%{\\033[48;5;0;38;5;${time_color_code}m%} %c %{$reset_color%(0?.$fg[black].$fg[white])%} >%{$reset_color%} "
+  local prompt="%{\\033[48;5;0;38;5;${time_color_code}m%} %c %{$reset_color%(0?.$fg[black].$fg[white])%} > %{$reset_color\033k[%c]\033\\%}"
   if [[ $(( SECONDS - last_seconds )) -ge $_PROMPT_CACHE_TIMEOUT ]]; then
     prompt="%{$(_print_prompt_first_line $time_color_code 0)%}${prompt}"
     _gen_cache_file
