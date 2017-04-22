@@ -54,10 +54,19 @@ function _print_prompt_first_line
   echo "%U$fg[black]%(!.$bg[red].$bg[green]) %n $bg[blue] %M ${reset_color}$(git_prompt_info)\\033[38;5;0;48;5;${time_color_code}m %D{%H:%M} $reset_color"$'\n'"%(!.$fg[red].$fg[green])\\033[48;5;${line2_first_color_code}m◤${reset_color}"
 }
 
+function _print_title
+{
+  if [ -n "$TMUX" ]; then
+    echo "\033k[%c]\033\\"
+  else
+   echo "\033]0;[%c]\007"
+  fi
+}
+
 function _print_prompt
 {
   eval $(cat "$_PROMPT_CACHE_FILE") # read cache value
-  local prompt="%{\\033[48;5;0;38;5;${time_color_code}m%} %c %{$reset_color%(0?.$fg[black].$fg[white])%} > %{$reset_color\033k[%c]\033\\%}"
+  local prompt="%{\\033[48;5;0;38;5;${time_color_code}m%} %c %{$reset_color%(0?.$fg[black].$fg[white])%} > %{$reset_color$(_print_title)%}"
   if [[ $(( SECONDS - last_seconds )) -ge $_PROMPT_CACHE_TIMEOUT ]]; then
     prompt="%{$(_print_prompt_first_line $time_color_code 0)%}${prompt}"
     _gen_cache_file
