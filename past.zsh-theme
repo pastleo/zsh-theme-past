@@ -51,7 +51,7 @@ function _print_prompt_first_line
 {
   local time_color_code=$1
   local line2_first_color_code=$2
-  echo "%U$fg[black]%(!.$bg[red].$bg[green]) %n $bg[blue] %M ${reset_color}$(git_prompt_info)\\033[38;5;0;48;5;${time_color_code}m %D{%H:%M} $reset_color"$'\n'"%(!.$fg[red].$fg[green])\\033[48;5;${line2_first_color_code}m◤${reset_color}"
+  echo "%U$fg[black]%(!.$bg[red].$bg[green]) %n $bg[blue] %M ${reset_color}$(git_prompt_info)\\033[38;5;0;48;5;${time_color_code}m %D{%H:%M} $reset_color"$'\n'"${reset_color}"
 }
 
 function _print_title
